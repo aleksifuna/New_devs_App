@@ -1449,6 +1449,14 @@ export class SecureAPIClient {
   }
 
   // ============= DASHBOARD API =============
+  async getDashboardProperties(tenantId: string): Promise<Array<{ id: string; name: string }>> {
+    const queryParams = new URLSearchParams({ tenant_id: tenantId });
+    const response = await this.request<Array<{ id: string; name: string }>>(
+      `/api/v1/dashboard/properties?${queryParams}`
+    );
+    return Array.isArray(response) ? response : [];
+  }
+
   /**
    * Get dashboard summary with optional simulation header
    */

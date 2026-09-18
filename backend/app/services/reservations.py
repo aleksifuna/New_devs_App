@@ -15,7 +15,6 @@ async def calculate_monthly_revenue(property_id: str, month: int, year: int, db_
         
     print(f"DEBUG: Querying revenue for {property_id} from {start_date} to {end_date}")
 
-    # SQL Simulation (This would be executed against the actual DB)
     query = """
         SELECT SUM(total_amount) as total
         FROM reservations
@@ -26,10 +25,9 @@ async def calculate_monthly_revenue(property_id: str, month: int, year: int, db_
     """
     
     # In production this query executes against a database session.
-    # result = await db.fetch_val(query, property_id, tenant_id, start_date, end_date)
-    # return result or Decimal('0')
-    
-    return Decimal('0') # Placeholder for now until DB connection is finalized
+    result = await db.fetch_val(query, property_id, tenant_id, start_date, end_date)
+    return result or Decimal('0')
+
 
 async def calculate_total_revenue(property_id: str, tenant_id: str) -> Dict[str, Any]:
     """
